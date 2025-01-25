@@ -9,6 +9,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # Initialise pico_sdk from installed location
 # (note this can come from environment, CMake cache etc)
 
+
 # == DO NOT EDIT THE FOLLOWING LINES for the Raspberry Pi Pico VS Code Extension to work ==
 if(WIN32)
     set(USERHOME $ENV{USERPROFILE})
@@ -41,12 +42,13 @@ pico_set_program_name(blinking "blinking")
 pico_set_program_version(blinking "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(blinking 0)
-pico_enable_stdio_usb(blinking 0)
+pico_enable_stdio_uart(blinking 1)
+pico_enable_stdio_usb(blinking 1)
 
 # Add the standard library to the build
 target_link_libraries(blinking
-        pico_stdlib)
+        pico_stdlib
+        hardware_gpio)
 
 # Add the standard include files to the build
 target_include_directories(blinking PRIVATE
@@ -54,9 +56,11 @@ target_include_directories(blinking PRIVATE
 )
 
 # Add any user requested libraries
-target_link_libraries(blinking 
+target_link_libraries(blinking pico_stdlib hardware_pwm
         
         )
 
 pico_add_extra_outputs(blinking)
+
+#To enable serial print (over USB CDC) in your Raspberry Pi Pico C/C++ SDK project, you need to edit the CMakeLists.txt file by adding the following two lines of code:
 
