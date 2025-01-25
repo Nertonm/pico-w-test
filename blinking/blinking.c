@@ -24,7 +24,7 @@ int main()
             gpio_put(led_pin_red, 0);
             sleep_ms(1000);
         }
-        if (gpio_get(button_pin) == 0) {
+        if (gpio_get(button_a) == 0) {
             // Entra no modo BOOTSEL
             reset_usb_boot(0, 0);
         }
